@@ -12,9 +12,11 @@
             FontFamily="Asimovian-Regular"
             FontSize="Title"
             TextColor="DarkBlue"
+            BackgroundColor="Aquamarine"
             VerticalTextAlignment="Center"
             VerticalOptions="Center"
-            Padding="25,25,0,0"
+            HorizontalOptions="Center"
+            Padding="25,25,25,25"
             HeightRequest="200"
         />
     </Shell.TitleView>

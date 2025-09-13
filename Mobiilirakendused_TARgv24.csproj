@@ -64,7 +64,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiFont Remove="Resources\Fonts\Honk-Regular-VariableFont_MORF-SHLN.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Remove="MainPage.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Fonts\Honk-Regular-VariableFont_MORF-SHLN.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -80,6 +88,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="TekstPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="TimerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Valgusfoor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
