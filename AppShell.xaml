@@ -7,13 +7,14 @@
     xmlns:local="clr-namespace:Mobiilirakendused_TARgv24"
     Shell.FlyoutBehavior="Disabled"
     Title="Mobiilirakendused_TARgv24"
-    Shell.BackgroundColor="Aquamarine"
-    Shell.TitleColor="DarkBlue">
+    Shell.BackgroundColor="Grey">
     <Shell.TitleView>
         <Label
-            Text="Näidised"
-            FontFamily="Asimovian-Regular"
-            FontSize="Title"
+            Text="NÄIDISED"
+            FontFamily="PirataOne-Regular"
+            FontSize="36"
+            TextColor="Black"
+            CharacterSpacing="8" 
             VerticalTextAlignment="Center"
             VerticalOptions="Center"
             HorizontalOptions="Center"

@@ -4,16 +4,24 @@ namespace Mobiilirakendused_TARgv24;
 
 public partial class StartPage : ContentPage
 {
-	public List<ContentPage> lehed = new List<ContentPage>() { new TekstPage(), new FigurePage(), new TimerPage(), new Valgusfoor(), new DateTimePage(), new StepperSliderPage() };
-	public List<string> tekstid = new List<string>() { "Tekst'ga leht", "Figure leht", "Timer", "Valgusfoor", "Kuupäevad ja kellaajad", "StepperSlider leht" };
+	public List<ContentPage> lehed = new List<ContentPage>() { new TekstPage(), new FigurePage(), new TimerPage(), new Valgusfoor(), new DateTimePage(), new SnowmanPage() };
+	public List<string> tekstid = new List<string>() { "Tekst'ga leht", "Figure leht", "Timer", "Valgusfoor", "Kuupäevad ja kellaajad", "Lumememm" };
 	ScrollView sv;
 	VerticalStackLayout vsl;
+	Image img, img2;
 
 	public StartPage()
 	{
 		//InitializeComponent();
 		Title = "Avaleht";
-		vsl = new VerticalStackLayout { BackgroundColor = Color.FromRgb(240, 240, 240) };
+		BackgroundImageSource = "bg1.jpg";
+		vsl = new VerticalStackLayout {  };
+		img = new Image
+		{
+			Source = "image.png",
+			HorizontalOptions = LayoutOptions.Center
+		};
+		vsl.Add(img);
 		for (int i = 0; i < lehed.Count; i++)
 		{
 			Button nupp = new Button
@@ -22,33 +30,41 @@ public partial class StartPage : ContentPage
 				FontSize = 20,
 				TextColor = Colors.White,
 				Padding = 10,
-                CornerRadius = 20,
-				FontFamily = "Asimovian-Regular",
+				CornerRadius = 20,
+				FontFamily = "Texturina-VariableFont",
 				Margin = 10,
+				WidthRequest = DeviceDisplay.MainDisplayInfo.Width / 4,
 				ZIndex = i,
-                Shadow = new Shadow { Opacity = 0.35f, Offset = new Point(4, 4), Radius = 8 }
-            };
+				Shadow = new Shadow { Opacity = 0.35f, Offset = new Point(4, 4), Radius = 8 }
+			};
 
-            nupp.Background = new LinearGradientBrush(
+			nupp.Background = new LinearGradientBrush(
 				new GradientStopCollection
 				{
-					new GradientStop(Colors.OrangeRed, 0.0f),
-					new GradientStop(Colors.Cyan, 1.0f)
+					new GradientStop(Color.FromRgba(139, 0, 0, 230), 1.0f),
+					new GradientStop(Color.FromRgba(255, 0, 0, 180), 0.7f),
+					new GradientStop(Color.FromRgba(255, 0, 0, 0), 0.0f)
 				},
 				new Point(0, 0),
 				new Point(0, 1)
 			);
 
-            vsl.Add(nupp);
+			vsl.Add(nupp);
 			nupp.Clicked += Nupp_Clicked;
-        }
-        sv = new ScrollView { Content = vsl };
+		}
+		img2 = new Image
+		{
+			Source = "image.png",
+			HorizontalOptions = LayoutOptions.Center
+		};
+		vsl.Add(img2);
+		sv = new ScrollView { Content = vsl };
 		Content = sv;
-    }
+	}
 
 	private async void Nupp_Clicked (object? sender, EventArgs e)
 	{
 		Button nupp = (Button)sender;
 		await Navigation.PushAsync(lehed[nupp.ZIndex]);
-    }
+	}
 }
