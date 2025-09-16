@@ -21,6 +21,7 @@ public partial class Valgusfoor : ContentPage
     public Valgusfoor()
     {
         //InitializeComponent();
+        Title = "Valgusfoor";
         var foor_suurus = DeviceDisplay.MainDisplayInfo.Width / 8;
         punane = Color.FromRgb(255, 0, 0);
         kollane = Color.FromRgb(255, 255, 0);
