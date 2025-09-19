@@ -330,14 +330,15 @@ public partial class SnowmanPage : ContentPage
                     busy = true;
 
 
-                    var tasks = elemendid.Select(v =>
-                        Task.WhenAll
-                        (
-                            v.FadeTo(0, (uint)stepper.Value, Easing.CubicIn),  // uint - kuna stepper.Value on double
-                            v.ScaleTo(0.6, (uint)stepper.Value, Easing.CubicIn)
-                        )
-                    );
-                    await Task.WhenAll(tasks);
+                    var kõik_animatsioonid = new List<Task>();
+                    foreach (var v in elemendid)
+                    {
+                        // value, kiirus ms, easing
+                        // Easing - кривая плавности анимации, CubicIn - плавный старт и ускорение в конце
+                        kõik_animatsioonid.Add(v.FadeTo(0, (uint)stepper.Value, Easing.CubicIn));
+                        kõik_animatsioonid.Add(v.ScaleTo(0.6, (uint)stepper.Value, Easing.CubicIn));
+                    }
+                    await Task.WhenAll(kõik_animatsioonid);
 
                     busy = false;
                     break;
@@ -345,29 +346,58 @@ public partial class SnowmanPage : ContentPage
 
             case "Tantsi":
                 {
-                    if (busy) return; busy = true;
-                    try
+                    if (busy)
                     {
-                        uint dur = (uint)(stepper?.Value ?? 800);
-
-                        // 3 качка влево-вправо
-                        for (int i = 0; i < 3; i++)
-                        {
-                            var leftMoves = new List<Task>();
-                            foreach (var v in elemendid) leftMoves.Add(v.TranslateTo(-30, 0, dur, Easing.SinInOut));
-                            await Task.WhenAll(leftMoves);
-
-                            var rightMoves = new List<Task>();
-                            foreach (var v in elemendid) rightMoves.Add(v.TranslateTo(30, 0, dur, Easing.SinInOut));
-                            await Task.WhenAll(rightMoves);
-                        }
-
-                        // назад в центр
-                        var backMoves = new List<Task>();
-                        foreach (var v in elemendid) backMoves.Add(v.TranslateTo(0, 0, dur, Easing.SinInOut));
-                        await Task.WhenAll(backMoves);
+                        break;
                     }
-                    finally { busy = false; }
+                    busy = true;
+
+                    // liigub paremale, vasakule ja hüppab 3 korda - TranslateTo
+                    for (int i = 0; i < 3; i++)
+                    {
+                        // liigub vasakule
+                        var vasakule = new List<Task>();
+                        foreach (var v in elemendid)
+                        {
+                            // x, y, kiirus ms, easing
+                            // SinInOut - мягкий старт, и мягкая остановка
+                            vasakule.Add(v.TranslateTo(-30, 0, (uint)stepper.Value, Easing.SinInOut));
+                        }
+                        await Task.WhenAll(vasakule);
+
+                        // hüppab
+                        var hüppa = new List<Task>();
+                        foreach (var v in elemendid)
+                        {
+                            hüppa.Add(v.TranslateTo(-30, -30, (uint)stepper.Value, Easing.SinInOut));
+                        }
+                        await Task.WhenAll(hüppa);
+
+                        // liigub paremale
+                        var paremale = new List<Task>();
+                        foreach (var v in elemendid)
+                        {
+                            paremale.Add(v.TranslateTo(30, 0, (uint)stepper.Value, Easing.SinInOut));
+                        }
+                        await Task.WhenAll(paremale);
+
+                        // hüppab
+                        foreach (var v in elemendid)
+                        {
+                            hüppa.Add(v.TranslateTo(30, -30, (uint)stepper.Value, Easing.SinInOut));
+                        }
+                        await Task.WhenAll(hüppa);
+                    }
+
+                    // tagasi keskele
+                    var keskele = new List<Task>();
+                    foreach (var v in elemendid)
+                    {
+                        keskele.Add(v.TranslateTo(0, 0, (uint)stepper.Value, Easing.SinInOut)); 
+                    }
+                    await Task.WhenAll(keskele);
+
+                    busy = false;
                     break;
                 }
 
