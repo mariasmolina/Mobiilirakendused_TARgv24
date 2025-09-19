@@ -12,9 +12,9 @@
         <Label
             Text="NÄIDISED"
             FontFamily="PirataOne-Regular"
-            FontSize="36"
+            FontSize="30"
             TextColor="Black"
-            CharacterSpacing="8" 
+            CharacterSpacing="10" 
             VerticalTextAlignment="Center"
             VerticalOptions="Center"
             HorizontalOptions="Center"

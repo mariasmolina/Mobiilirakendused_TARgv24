@@ -12,7 +12,6 @@ public partial class StartPage : ContentPage
 
 	public StartPage()
 	{
-		//InitializeComponent();
 		Title = "Avaleht";
 		BackgroundImageSource = "bg1.jpg";
 		vsl = new VerticalStackLayout {  };
@@ -65,6 +64,6 @@ public partial class StartPage : ContentPage
 	private async void Nupp_Clicked (object? sender, EventArgs e)
 	{
 		Button nupp = (Button)sender;
-		await Navigation.PushAsync(lehed[nupp.ZIndex]);
+        await Navigation.PushAsync(lehed[nupp.ZIndex]);
 	}
 }
